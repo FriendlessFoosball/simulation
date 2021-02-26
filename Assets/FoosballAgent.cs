@@ -11,26 +11,33 @@ public class FoosballAgent : Agent
     public GameObject ball;
     public Transform goal;
 
-    Rigidbody rBody;
+    public bool player1;
+    public GameObject offense;
+    public GameObject goalie;
 
     //TODO: Tune these
     float linMoveMultiplier = 0.25f;
     float angMoveMultiplier = 5f;
 
-    float ballStartMultiplier = 15f;
+    float ballStartMultiplier = 20f;
+
+    float maxLinMove = 2f;
+
+    float frozenTime = 0f;
+    float maxFrozenTime = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        rBody = GetComponent<Rigidbody>();
+
     }
 
-    //Use OnEpisodeBegin for setup if needed
+    //Reset ball to middle with random force
     public override void OnEpisodeBegin()
     {
+        frozenTime = 0f;
         ball.transform.localPosition = Vector3.zero;
-        ball.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * 15);
-        //ball.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * ballStartMultiplier);
+        ball.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * ballStartMultiplier);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -40,22 +47,41 @@ public class FoosballAgent : Agent
         sensor.AddObservation(ball.GetComponent<Rigidbody>().velocity.x);
         sensor.AddObservation(ball.GetComponent<Rigidbody>().velocity.y);
         sensor.AddObservation(ball.GetComponent<Rigidbody>().velocity.z);
+        //Possibly add observe goal position?
 
         //Paddle Observations
-        sensor.AddObservation(this.transform.localPosition);
-        sensor.AddObservation(this.transform.localRotation);
-        sensor.AddObservation(rBody.velocity.z); //Make sure z is what we want
-        sensor.AddObservation(rBody.angularVelocity.z);
+        sensor.AddObservation(offense.transform.localPosition);
+        sensor.AddObservation(offense.transform.localRotation);
+        sensor.AddObservation(goalie.transform.localPosition);
+        sensor.AddObservation(goalie.transform.localRotation);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        //Actions, size = 2
-        Vector3 linMove = Vector3.up * actions.ContinuousActions[0] * linMoveMultiplier;
-        transform.Translate(linMove);
+        //Actions, size = 4
+        Vector3 offenseLinMove = Vector3.up * actions.ContinuousActions[0] * linMoveMultiplier;
+        if (player1 && Mathf.Abs(offense.transform.localPosition.z + offenseLinMove.y) < maxLinMove)
+        {
+            offense.transform.Translate(offenseLinMove);
+        }
+        else if (!player1 && Mathf.Abs(offense.transform.localPosition.z - offenseLinMove.y) < maxLinMove)
+        {
+            offense.transform.Translate(offenseLinMove);
+        }
+        Vector3 offenseAngMove = Vector3.up * actions.ContinuousActions[1] * angMoveMultiplier;
+        offense.transform.Rotate(offenseAngMove);
 
-        Vector3 angMove = Vector3.up * actions.ContinuousActions[1] * angMoveMultiplier;
-        transform.Rotate(angMove);
+        Vector3 goalieLinMove = Vector3.up * actions.ContinuousActions[2] * linMoveMultiplier;
+        if (player1 && Mathf.Abs(goalie.transform.localPosition.z + goalieLinMove.y) < maxLinMove)
+        {
+            goalie.transform.Translate(goalieLinMove);
+        }
+        else if (!player1 && Mathf.Abs(goalie.transform.localPosition.z - goalieLinMove.y) < maxLinMove)
+        {
+            goalie.transform.Translate(goalieLinMove);
+        }
+        Vector3 goalieAngMove = Vector3.up * actions.ContinuousActions[3] * angMoveMultiplier;
+        goalie.transform.Rotate(goalieAngMove);
 
         //Rewards
         float distanceToGoal = Vector3.Distance(ball.transform.localPosition, goal.localPosition);
@@ -67,6 +93,18 @@ public class FoosballAgent : Agent
         }
 
         //TODO: neg reward for owngoal? Reset episode if ball falls off?
+        //Reset if ball stops moving for 10 secs or falls off plane
+        if (ball.GetComponent<Rigidbody>().IsSleeping() || ball.transform.position.y < -5)
+        {
+            if (frozenTime != 0f && Time.time - frozenTime > maxFrozenTime)
+            {
+                EndEpisode();
+            }
+            else if (frozenTime == 0f)
+            {
+                frozenTime = Time.time;
+            }
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -74,5 +112,8 @@ public class FoosballAgent : Agent
         var continuousActionsOut = actionsOut.ContinuousActions;
         continuousActionsOut[0] = Input.GetAxis("Vertical");
         continuousActionsOut[1] = Input.GetAxis("Horizontal");
+
+        continuousActionsOut[2] = Input.GetAxis("Vertical");
+        continuousActionsOut[3] = Input.GetAxis("Horizontal");
     }
 }
