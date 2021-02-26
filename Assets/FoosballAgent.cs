@@ -14,8 +14,10 @@ public class FoosballAgent : Agent
     Rigidbody rBody;
 
     //TODO: Tune these
-    float linForceMultiplier = 10;
-    float angForceMultiplier = 10;
+    float linMoveMultiplier = 0.25f;
+    float angMoveMultiplier = 5f;
+
+    float ballStartMultiplier = 15f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,12 @@ public class FoosballAgent : Agent
     }
 
     //Use OnEpisodeBegin for setup if needed
+    public override void OnEpisodeBegin()
+    {
+        ball.transform.localPosition = Vector3.zero;
+        ball.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * 15);
+        //ball.GetComponent<Rigidbody>().AddRelativeForce(Random.onUnitSphere * ballStartMultiplier);
+    }
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -37,17 +45,17 @@ public class FoosballAgent : Agent
         sensor.AddObservation(this.transform.localPosition);
         sensor.AddObservation(this.transform.localRotation);
         sensor.AddObservation(rBody.velocity.z); //Make sure z is what we want
-        sensor.AddObservation(rBody.angularVelocity);
+        sensor.AddObservation(rBody.angularVelocity.z);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
         //Actions, size = 2
-        Vector3 linMove = Vector3.up * actions.ContinuousActions[0];
-        rBody.AddForce(linMove * linForceMultiplier);
+        Vector3 linMove = Vector3.up * actions.ContinuousActions[0] * linMoveMultiplier;
+        transform.Translate(linMove);
 
-        Vector3 angMove = Vector3.up * actions.ContinuousActions[1];
-        rBody.AddTorque(angMove * angForceMultiplier);
+        Vector3 angMove = Vector3.up * actions.ContinuousActions[1] * angMoveMultiplier;
+        transform.Rotate(angMove);
 
         //Rewards
         float distanceToGoal = Vector3.Distance(ball.transform.localPosition, goal.localPosition);
@@ -59,5 +67,12 @@ public class FoosballAgent : Agent
         }
 
         //TODO: neg reward for owngoal? Reset episode if ball falls off?
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = Input.GetAxis("Vertical");
+        continuousActionsOut[1] = Input.GetAxis("Horizontal");
     }
 }

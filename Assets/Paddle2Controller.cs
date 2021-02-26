@@ -14,7 +14,14 @@ public class Paddle2Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && currentDisplacement < maxDisplacement)
+        Vector3 translation = Vector3.down * Input.GetAxis("Vertical") * linSpeed * Time.deltaTime;
+        transform.Translate(translation);
+
+        Vector3 rotation = Vector3.up * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        transform.Rotate(rotation);
+
+
+        /*if (Input.GetKey(KeyCode.UpArrow) && currentDisplacement < maxDisplacement)
         {
             Vector3 translation = Vector3.down * linSpeed * Time.deltaTime;
             transform.Translate(translation);
@@ -38,5 +45,6 @@ public class Paddle2Controller : MonoBehaviour
         {
             transform.Rotate(-Vector3.up * rotSpeed * Time.deltaTime);
         }
+        */
     }
 }
