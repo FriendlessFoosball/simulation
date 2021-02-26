@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(transform.right * -100.0f);
+        //GetComponent<Rigidbody>().AddForce(transform.right * -100.0f);
     }
 
     // Update is called once per frame
