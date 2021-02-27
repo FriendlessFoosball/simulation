@@ -17,9 +17,9 @@ public class FoosballAgent : Agent {
 
     //TODO: Tune these
     float linMoveMultiplier = 2f;//0.25f;
-    float angMoveMultiplier = 10f;
+    float angMoveMultiplier = 1f; //10f;
 
-    float ballStartMultiplier = 20f; //20f;
+    float ballStartMultiplier = 100f; //20f;
 
     float maxLinMove = 4.64f;
 
