@@ -2,17 +2,41 @@
     "PaddleBehavior": {
         "checkpoints": [
             {
-                "steps": 36022,
-                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-36022.onnx",
-                "reward": -1.9105141027407213,
-                "creation_time": 1614426390.929929
+                "steps": 3499390,
+                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-3499390.onnx",
+                "reward": -1.8431029267933057,
+                "creation_time": 1614435108.3955772
+            },
+            {
+                "steps": 3999847,
+                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-3999847.onnx",
+                "reward": -1.5277279100634835,
+                "creation_time": 1614436468.149554
+            },
+            {
+                "steps": 4499905,
+                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-4499905.onnx",
+                "reward": -0.9996708953380584,
+                "creation_time": 1614437822.894148
+            },
+            {
+                "steps": 4999179,
+                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-4999179.onnx",
+                "reward": -3.5463011264801025,
+                "creation_time": 1614439184.4629009
+            },
+            {
+                "steps": 5000179,
+                "file_path": "results/spinreduce/PaddleBehavior/PaddleBehavior-5000179.onnx",
+                "reward": -4.735829472541809,
+                "creation_time": 1614439184.636689
             }
         ],
         "final_checkpoint": {
-            "steps": 36022,
+            "steps": 5000179,
             "file_path": "results/spinreduce/PaddleBehavior.onnx",
-            "reward": -1.9105141027407213,
-            "creation_time": 1614426390.929929
+            "reward": -4.735829472541809,
+            "creation_time": 1614439184.636689
         }
     },
     "metadata": {
