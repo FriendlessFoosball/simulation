@@ -16,7 +16,7 @@ public class FoosballAgent : Agent {
     public GameObject goalie;
 
     //TODO: Tune these
-    float linMoveMultiplier = 0.25f;
+    float linMoveMultiplier = 2f;//0.25f;
     float angMoveMultiplier = 10f;
 
     float ballStartMultiplier = 20f; //20f;
@@ -54,33 +54,47 @@ public class FoosballAgent : Agent {
 
         //Paddle Observations
         sensor.AddObservation(offense.transform.localPosition.z);
+        sensor.AddObservation(offense.GetComponent<Rigidbody>().velocity.z);
         sensor.AddObservation(offense.transform.localRotation.z);
+        sensor.AddObservation(offense.GetComponent<Rigidbody>().angularVelocity.z);
         sensor.AddObservation(goalie.transform.localPosition.z);
+        sensor.AddObservation(goalie.GetComponent<Rigidbody>().velocity.z);
         sensor.AddObservation(goalie.transform.localRotation.z);
+        sensor.AddObservation(goalie.GetComponent<Rigidbody>().angularVelocity.z);
+
+        float spin = Mathf.Abs(offense.GetComponent<Rigidbody>().angularVelocity.z / angMoveMultiplier) + Mathf.Abs(goalie.GetComponent<Rigidbody>().angularVelocity.z / angMoveMultiplier);
+
+        AddReward(-0.01f * 0.50f * spin);
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
         //Actions, size = 4
         Vector3 offenseLinMove = Vector3.forward * actions.ContinuousActions[0] * linMoveMultiplier;
         
-        if (player1 && Mathf.Abs(offense.transform.localPosition.z + offenseLinMove.z) < maxLinMove) {
-            offense.transform.Translate(offenseLinMove);
-        } else if (!player1 && Mathf.Abs(offense.transform.localPosition.z + offenseLinMove.z) < maxLinMove) {
-            offense.transform.Translate(offenseLinMove);
-        }
+        // if (player1 && Mathf.Abs(offense.transform.localPosition.z + offenseLinMove.z) < maxLinMove) {
+        //     offense.transform.Translate(offenseLinMove);
+        // } else if (!player1 && Mathf.Abs(offense.transform.localPosition.z + offenseLinMove.z) < maxLinMove) {
+        //     offense.transform.Translate(offenseLinMove);
+        // }
+
+        offense.GetComponent<Rigidbody>().AddRelativeForce(offenseLinMove, ForceMode.VelocityChange);
 
         Vector3 offenseAngMove = Vector3.forward * actions.ContinuousActions[1] * angMoveMultiplier;
-        offense.transform.Rotate(offenseAngMove);
+        //offense.transform.Rotate(offenseAngMove);
+        offense.GetComponent<Rigidbody>().AddRelativeTorque(offenseAngMove, ForceMode.VelocityChange);
 
         Vector3 goalieLinMove = Vector3.forward * actions.ContinuousActions[2] * linMoveMultiplier;
-        if (player1 && Mathf.Abs(goalie.transform.localPosition.z + goalieLinMove.z) < maxLinMove) {
-            goalie.transform.Translate(goalieLinMove);
-        } else if (!player1 && Mathf.Abs(goalie.transform.localPosition.z + goalieLinMove.z) < maxLinMove) {
-            goalie.transform.Translate(goalieLinMove);
-        }
+        // if (player1 && Mathf.Abs(goalie.transform.localPosition.z + goalieLinMove.z) < maxLinMove) {
+        //     goalie.transform.Translate(goalieLinMove);
+        // } else if (!player1 && Mathf.Abs(goalie.transform.localPosition.z + goalieLinMove.z) < maxLinMove) {
+        //     goalie.transform.Translate(goalieLinMove);
+        // }
+
+        goalie.GetComponent<Rigidbody>().AddRelativeForce(goalieLinMove, ForceMode.VelocityChange);
 
         Vector3 goalieAngMove = Vector3.forward * actions.ContinuousActions[3] * angMoveMultiplier;
-        goalie.transform.Rotate(goalieAngMove);
+        // goalie.transform.Rotate(goalieAngMove);
+        goalie.GetComponent<Rigidbody>().AddRelativeTorque(goalieAngMove, ForceMode.VelocityChange);
 
         //Rewards
         float distanceToGoal = Vector3.Distance(ball.transform.localPosition, goal.localPosition);
@@ -100,6 +114,7 @@ public class FoosballAgent : Agent {
         //Reset if ball stops moving for 10 secs or falls off plane
         if (ball.GetComponent<Rigidbody>().IsSleeping() || ball.transform.position.y < -5) {
             if (frozenTime != 0f && Time.time - frozenTime > maxFrozenTime) {
+                SetReward(-1.0f);
                 EndEpisode();
             } else if (frozenTime == 0f) {
                 frozenTime = Time.time;
