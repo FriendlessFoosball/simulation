@@ -174,14 +174,14 @@ public class FoosballAgent : Agent {
         // }
         
         if (ball.transform.localPosition.y < -5 || Mathf.Abs(ball.transform.localPosition.x) > (fieldLength + 5) || Mathf.Abs(ball.transform.localPosition.z) > (fieldWidth + 5)) {
-            SetReward(-1.0f);
+            SetReward(-4.0f);
             EndEpisode();
         }
 
         float spin = Mathf.Abs(offenseRb.angularVelocity.z / maxAngularVelocity) + Mathf.Abs(goalieRb.angularVelocity.z / maxAngularVelocity);
 
-        AddReward(-0.01f * 0.50f * spin);
-        AddReward(-0.001f);
+        AddReward(-0.001f * 0.50f * spin);
+        //AddReward(-0.001f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {

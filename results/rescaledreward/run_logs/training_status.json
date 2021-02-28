@@ -1,0 +1,47 @@
+{
+    "PaddleBehavior": {
+        "checkpoints": [
+            {
+                "steps": 3499038,
+                "file_path": "results/rescaledreward/PaddleBehavior/PaddleBehavior-3499038.onnx",
+                "reward": -3.586306631565094,
+                "creation_time": 1614497128.7393038
+            },
+            {
+                "steps": 3999700,
+                "file_path": "results/rescaledreward/PaddleBehavior/PaddleBehavior-3999700.onnx",
+                "reward": 0.4814958989620209,
+                "creation_time": 1614497706.57407
+            },
+            {
+                "steps": 4499607,
+                "file_path": "results/rescaledreward/PaddleBehavior/PaddleBehavior-4499607.onnx",
+                "reward": -2.044407770037651,
+                "creation_time": 1614498277.7714171
+            },
+            {
+                "steps": 4999541,
+                "file_path": "results/rescaledreward/PaddleBehavior/PaddleBehavior-4999541.onnx",
+                "reward": null,
+                "creation_time": 1614498851.538785
+            },
+            {
+                "steps": 5000541,
+                "file_path": "results/rescaledreward/PaddleBehavior/PaddleBehavior-5000541.onnx",
+                "reward": null,
+                "creation_time": 1614498851.651239
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000541,
+            "file_path": "results/rescaledreward/PaddleBehavior.onnx",
+            "reward": null,
+            "creation_time": 1614498851.651239
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1"
+    }
+}

@@ -2,17 +2,41 @@
     "PaddleBehavior": {
         "checkpoints": [
             {
-                "steps": 2400,
-                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-2400.onnx",
-                "reward": -1.0,
-                "creation_time": 1614488760.970148
+                "steps": 499897,
+                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-499897.onnx",
+                "reward": -10.031859536965689,
+                "creation_time": 1614491072.6965718
+            },
+            {
+                "steps": 999583,
+                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-999583.onnx",
+                "reward": null,
+                "creation_time": 1614491676.1501231
+            },
+            {
+                "steps": 1499267,
+                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-1499267.onnx",
+                "reward": -11.393220983445644,
+                "creation_time": 1614492245.587353
+            },
+            {
+                "steps": 1999012,
+                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-1999012.onnx",
+                "reward": -17.46817895770073,
+                "creation_time": 1614492806.04588
+            },
+            {
+                "steps": 2170536,
+                "file_path": "results/cappedvelocity/PaddleBehavior/PaddleBehavior-2170536.onnx",
+                "reward": -17.67994624376297,
+                "creation_time": 1614492993.992686
             }
         ],
         "final_checkpoint": {
-            "steps": 2400,
+            "steps": 2170536,
             "file_path": "results/cappedvelocity/PaddleBehavior.onnx",
-            "reward": -1.0,
-            "creation_time": 1614488760.970148
+            "reward": -17.67994624376297,
+            "creation_time": 1614492993.992686
         }
     },
     "metadata": {
