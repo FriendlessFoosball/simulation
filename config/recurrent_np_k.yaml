@@ -14,13 +14,13 @@ behaviors:
       normalize: false
       hidden_units: 256
       num_layers: 2
-      memory_size: 256
+      memory_size: 128
       sequence_length: 64
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1.0
-    max_steps: 150000000
+    max_steps: 5000000
     time_horizon: 1000
     summary_freq: 10000
     self_play:
