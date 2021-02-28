@@ -1,0 +1,47 @@
+{
+    "PaddleBehavior": {
+        "checkpoints": [
+            {
+                "steps": 3499933,
+                "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior/PaddleBehavior-3499933.onnx",
+                "reward": -0.2835985212884627,
+                "creation_time": 1614519785.709256
+            },
+            {
+                "steps": 3999973,
+                "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior/PaddleBehavior-3999973.onnx",
+                "reward": -0.5023399633778767,
+                "creation_time": 1614520483.132053
+            },
+            {
+                "steps": 4499981,
+                "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior/PaddleBehavior-4499981.onnx",
+                "reward": -0.38282063594697235,
+                "creation_time": 1614521175.501201
+            },
+            {
+                "steps": 4999799,
+                "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior/PaddleBehavior-4999799.onnx",
+                "reward": -0.6256228515498892,
+                "creation_time": 1614521866.4185238
+            },
+            {
+                "steps": 5000219,
+                "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior/PaddleBehavior-5000219.onnx",
+                "reward": -0.6256502162528421,
+                "creation_time": 1614521866.548012
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000219,
+            "file_path": "results/recurrent_nopenalty_kickincen/PaddleBehavior.onnx",
+            "reward": -0.6256502162528421,
+            "creation_time": 1614521866.548012
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1"
+    }
+}
