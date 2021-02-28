@@ -46,6 +46,11 @@ public class FoosballAgent : Agent {
     Rigidbody oOffenseRb;
     Rigidbody oGoalieRb;
 
+    PaddleInitializer offenseScript;
+    PaddleInitializer goalieScript;
+    PaddleInitializer oOffenseScript;
+    PaddleInitializer oGoalieScript;
+
     // Start is called before the first frame update
     void Start() {
         offenseRb = offense.GetComponent<Rigidbody>();
@@ -54,6 +59,11 @@ public class FoosballAgent : Agent {
 
         oOffenseRb = opponentOffense.GetComponent<Rigidbody>();
         oGoalieRb = opponentGoalie.GetComponent<Rigidbody>();
+
+        offenseScript = offense.GetComponent<PaddleInitializer>();
+        goalieScript = goalie.GetComponent<PaddleInitializer>();
+        oOffenseScript = opponentOffense.GetComponent<PaddleInitializer>();
+        oGoalieScript = opponentGoalie.GetComponent<PaddleInitializer>();
     }
 
     //Reset ball to middle with random force
@@ -62,12 +72,17 @@ public class FoosballAgent : Agent {
         ball.transform.localPosition = Vector3.zero;
         ballRb.velocity = Vector3.zero;
         ballRb.AddRelativeForce(Random.onUnitSphere * ballStartMultiplier);
+
+        offenseScript.Reset();
+        goalieScript.Reset();
+        oOffenseScript.Reset();
+        oGoalieScript.Reset();
+
+        invert = player1 ? 1f : -1f;
     }
 
     public override void CollectObservations(VectorSensor sensor) {
         //Ball Observation (4)
-        invert = player1 ? 1f : -1f;
-
         sensor.AddObservation(invert * ball.transform.localPosition.x / fieldLength);
         sensor.AddObservation(invert * ball.transform.localPosition.z / fieldWidth);
         sensor.AddObservation(invert * ballRb.velocity.x / maxBallVelocity);
@@ -77,13 +92,13 @@ public class FoosballAgent : Agent {
 
         //Paddle Observations (8)
         sensor.AddObservation(offense.transform.localPosition.z / maxLinMove);
-        sensor.AddObservation(offenseRb.velocity.z / maxVelocity);
+        sensor.AddObservation(invert * offenseRb.velocity.z / maxVelocity);
         sensor.AddObservation(offense.transform.localRotation.z / 180f);
-        sensor.AddObservation(offenseRb.angularVelocity.z / maxAngularVelocity);
+        sensor.AddObservation(invert * offenseRb.angularVelocity.z / maxAngularVelocity);
         sensor.AddObservation(goalie.transform.localPosition.z / 180f);
-        sensor.AddObservation(goalieRb.velocity.z / maxVelocity);
+        sensor.AddObservation(invert * goalieRb.velocity.z / maxVelocity);
         sensor.AddObservation(goalie.transform.localRotation.z / 180f);
-        sensor.AddObservation(goalieRb.angularVelocity.z / maxAngularVelocity);
+        sensor.AddObservation(invert * goalieRb.angularVelocity.z / maxAngularVelocity);
 
         //Opponent Observations (4)
         sensor.AddObservation(-1f * opponentOffense.transform.localPosition.z / maxLinMove);
@@ -102,9 +117,11 @@ public class FoosballAgent : Agent {
         //     offense.transform.Translate(offenseLinMove);
         // }
 
-        if (Mathf.Abs(offenseRb.velocity.z + actions.ContinuousActions[0] * linMoveMultiplier) > maxVelocity) {
+        if (Mathf.Abs(invert * offenseRb.velocity.z + actions.ContinuousActions[0] * linMoveMultiplier) > maxVelocity) {
             Vector3 maxSpeed = Vector3.forward * maxVelocity;
-            offenseLinMove = maxSpeed - offenseRb.velocity;
+            if (invert * offenseRb.velocity.z < 0)
+                maxSpeed *= -1f;
+            offenseLinMove = maxSpeed - invert * offenseRb.velocity;
         }
         offenseRb.AddRelativeForce(offenseLinMove, ForceMode.VelocityChange);
 
@@ -119,9 +136,11 @@ public class FoosballAgent : Agent {
         //     goalie.transform.Translate(goalieLinMove);
         // }
 
-        if (Mathf.Abs(goalieRb.velocity.z + actions.ContinuousActions[2] * linMoveMultiplier) > maxVelocity) {
+        if (Mathf.Abs(invert * goalieRb.velocity.z + actions.ContinuousActions[2] * linMoveMultiplier) > maxVelocity) {
             Vector3 maxSpeed = Vector3.forward * maxVelocity;
-            goalieLinMove = maxSpeed - goalieRb.velocity;
+            if (invert * goalieRb.velocity.z < 0)
+                maxSpeed *= -1f;
+            goalieLinMove = maxSpeed - invert * goalieRb.velocity;
         }
         goalieRb.AddRelativeForce(goalieLinMove, ForceMode.VelocityChange);
 
@@ -154,7 +173,7 @@ public class FoosballAgent : Agent {
         //     }
         // }
         
-        if (ball.transform.position.y < -5 || Mathf.Abs(ball.transform.position.x) > (fieldLength + 5) || Mathf.Abs(ball.transform.position.z) > (fieldWidth + 5)) {
+        if (ball.transform.localPosition.y < -5 || Mathf.Abs(ball.transform.localPosition.x) > (fieldLength + 5) || Mathf.Abs(ball.transform.localPosition.z) > (fieldWidth + 5)) {
             SetReward(-1.0f);
             EndEpisode();
         }
