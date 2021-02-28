@@ -2,17 +2,23 @@
     "PaddleBehavior": {
         "checkpoints": [
             {
-                "steps": 482270,
-                "file_path": "results/ballreward/PaddleBehavior/PaddleBehavior-482270.onnx",
-                "reward": -3.830961689352989,
-                "creation_time": 1614502896.0046551
+                "steps": 499793,
+                "file_path": "results/ballreward/PaddleBehavior/PaddleBehavior-499793.onnx",
+                "reward": -5.922138799320567,
+                "creation_time": 1614505872.61825
+            },
+            {
+                "steps": 922839,
+                "file_path": "results/ballreward/PaddleBehavior/PaddleBehavior-922839.onnx",
+                "reward": -5.696247711777687,
+                "creation_time": 1614506470.8098161
             }
         ],
         "final_checkpoint": {
-            "steps": 482270,
+            "steps": 922839,
             "file_path": "results/ballreward/PaddleBehavior.onnx",
-            "reward": -3.830961689352989,
-            "creation_time": 1614502896.0046551
+            "reward": -5.696247711777687,
+            "creation_time": 1614506470.8098161
         }
     },
     "metadata": {

@@ -77,8 +77,8 @@ public class BallScorer : MonoBehaviour
 
     void Failure()
     {
-        m_humanAgent.SetReward(-4f);
-        m_robotAgent.SetReward(-4f);
+        m_humanAgent.SetReward(-1f);
+        m_robotAgent.SetReward(-1f);
         Reset();
     }
 
@@ -91,7 +91,7 @@ public class BallScorer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.localPosition.y < -5 || Mathf.Abs(transform.localPosition.x) > (fieldLength + 5) || Mathf.Abs(transform.localPosition.z) > (fieldWidth + 5))
+        if (transform.localPosition.y < -5 || Mathf.Abs(transform.localPosition.x) > (fieldLength + 2.75) || Mathf.Abs(transform.localPosition.z) > (fieldWidth + 2.75))
             Failure();
     }
 }
