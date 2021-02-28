@@ -2236,6 +2236,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67b505d9830844efead55a8fc27ba58a, type: 2}
+    - target: {fileID: 5987136644205761801, guid: 39048d278b62349ecb69ac08730ee03a,
+        type: 3}
+      propertyPath: m_TagString
+      value: AxisRobot
+      objectReference: {fileID: 0}
     - target: {fileID: 5987136644205761802, guid: 39048d278b62349ecb69ac08730ee03a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2256,6 +2261,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67b505d9830844efead55a8fc27ba58a, type: 2}
+    - target: {fileID: 8701881300936300033, guid: 39048d278b62349ecb69ac08730ee03a,
+        type: 3}
+      propertyPath: m_TagString
+      value: AxisRobot
+      objectReference: {fileID: 0}
     - target: {fileID: 8701881300936300034, guid: 39048d278b62349ecb69ac08730ee03a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2429,10 +2439,20 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.y
       value: 4.675
       objectReference: {fileID: 0}
+    - target: {fileID: 5987136644205761801, guid: 39048d278b62349ecb69ac08730ee03a,
+        type: 3}
+      propertyPath: m_TagString
+      value: AxisHuman
+      objectReference: {fileID: 0}
     - target: {fileID: 5987136644205761802, guid: 39048d278b62349ecb69ac08730ee03a,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 4.675
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701881300936300033, guid: 39048d278b62349ecb69ac08730ee03a,
+        type: 3}
+      propertyPath: m_TagString
+      value: AxisHuman
       objectReference: {fileID: 0}
     - target: {fileID: 8701881300936300034, guid: 39048d278b62349ecb69ac08730ee03a,
         type: 3}
@@ -2443,6 +2463,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HumanPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701881301643911439, guid: 39048d278b62349ecb69ac08730ee03a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8701881301643911440, guid: 39048d278b62349ecb69ac08730ee03a,
         type: 3}

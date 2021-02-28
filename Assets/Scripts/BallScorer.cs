@@ -77,8 +77,8 @@ public class BallScorer : MonoBehaviour
 
     void Failure()
     {
-        m_humanAgent.SetReward(-1f);
-        m_robotAgent.SetReward(-1f);
+        // m_humanAgent.SetReward(-1f);
+        // m_robotAgent.SetReward(-1f);
         Reset();
     }
 
@@ -87,6 +87,13 @@ public class BallScorer : MonoBehaviour
             RobotWin();
         else if (collision.gameObject.CompareTag("Human"))
             HumanWin();
+    }
+
+    void OnCollisionExit(Collision collision) {
+        if (collision.gameObject.CompareTag("AxisRobot"))
+            m_robotAgent.AddReward(0.02f);
+        else if (collision.gameObject.CompareTag("AxisHuman"))
+            m_humanAgent.AddReward(0.02f);
     }
 
     void FixedUpdate()
