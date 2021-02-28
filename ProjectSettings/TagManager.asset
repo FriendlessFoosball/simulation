@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player 2 Goal
-  - Player 1 Goal
   - Wall
+  - Robot
+  - Human
   layers:
   - Default
   - TransparentFX
