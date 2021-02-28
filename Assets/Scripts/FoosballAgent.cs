@@ -145,19 +145,24 @@ public class FoosballAgent : Agent {
 
         //TODO: neg reward for owngoal? Reset episode if ball falls off?
         //Reset if ball stops moving for 10 secs or falls off plane
-        if (ballRb.IsSleeping() || ball.transform.position.y < -5) {
-            if (frozenTime != 0f && Time.time - frozenTime > maxFrozenTime) {
-                SetReward(-1.0f);
-                EndEpisode();
-            } else if (frozenTime == 0f) {
-                frozenTime = Time.time;
-            }
+        // if (ballRb.IsSleeping() || ball.transform.position.y < -5) {
+        //     if (frozenTime != 0f && Time.time - frozenTime > maxFrozenTime) {
+        //         SetReward(-1.0f);
+        //         EndEpisode();
+        //     } else if (frozenTime == 0f) {
+        //         frozenTime = Time.time;
+        //     }
+        // }
+        
+        if (ball.transform.position.y < -5 || Mathf.Abs(ball.transform.position.x) > (fieldLength + 5) || Mathf.Abs(ball.transform.position.z) > (fieldWidth + 5)) {
+            SetReward(-1.0f);
+            EndEpisode();
         }
 
-        float spin = Mathf.Abs(offenseRb.angularVelocity.z / angMoveMultiplier) + Mathf.Abs(goalieRb.angularVelocity.z / angMoveMultiplier);
+        float spin = Mathf.Abs(offenseRb.angularVelocity.z / maxAngularVelocity) + Mathf.Abs(goalieRb.angularVelocity.z / maxAngularVelocity);
 
         AddReward(-0.01f * 0.50f * spin);
-        AddReward(-0.01f);
+        AddReward(-0.001f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {

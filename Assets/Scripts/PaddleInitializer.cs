@@ -13,7 +13,7 @@ public class PaddleInitializer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = Vector3.zero;
-        //rb.maxAngularVelocity = maxAngularVelocity;
+        rb.maxAngularVelocity = maxAngularVelocity;
     }
 
     // Update is called once per frame
