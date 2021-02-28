@@ -11,7 +11,7 @@ behaviors:
       num_epoch: 3
       learning_rate_schedule: linear
     network_settings:
-      normalize: true
+      normalize: false
       hidden_units: 256
       num_layers: 2
     reward_signals:
@@ -21,7 +21,7 @@ behaviors:
     max_steps: 5000000
     time_horizon: 1000
     summary_freq: 10000
-    threaded: False
+    threaded: false
     self_play:
       save_steps: 50000
       team_change: 100000

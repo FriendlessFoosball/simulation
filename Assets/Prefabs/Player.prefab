@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 16
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -80,13 +80,15 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 50000
   ball: {fileID: 0}
   goal: {fileID: 0}
   opponentGoal: {fileID: 0}
   player1: 0
   offense: {fileID: 0}
   goalie: {fileID: 0}
+  opponentOffense: {fileID: 0}
+  opponentGoalie: {fileID: 0}
 --- !u!114 &8701881301643911441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 2
   TakeActionsBetweenDecisions: 1
 --- !u!1001 &5987136644583810825
 PrefabInstance:
