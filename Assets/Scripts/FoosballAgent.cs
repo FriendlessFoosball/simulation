@@ -36,6 +36,10 @@ public class FoosballAgent : Agent {
     const float maxBallVelocity = 30f;
     
     float invert;
+    float existentialPenalty;
+    
+    [HideInInspector]
+    public float timePenalty;
 
     Rigidbody offenseRb;
     Rigidbody goalieRb;
@@ -48,6 +52,8 @@ public class FoosballAgent : Agent {
 
     // Start is called before the first frame update
     void Start() {
+        existentialPenalty = 1f / MaxStep;
+
         offenseRb = offense.GetComponent<Rigidbody>();
         goalieRb = goalie.GetComponent<Rigidbody>();
         ballRb = ball.GetComponent<Rigidbody>();
@@ -62,6 +68,7 @@ public class FoosballAgent : Agent {
 
     //Reset ball to middle with random force
     public override void OnEpisodeBegin() {
+        timePenalty = 0f;
         // backup for max timestep
         bs.ResetBall();
     }
@@ -93,6 +100,8 @@ public class FoosballAgent : Agent {
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
+        timePenalty -= existentialPenalty;
+
         //Actions, size = 4
         Vector3 offenseLinMove = Vector3.forward * actions.ContinuousActions[0] * linMoveMultiplier;
 

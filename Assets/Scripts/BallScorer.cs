@@ -63,7 +63,7 @@ public class BallScorer : MonoBehaviour
 
     void HumanWin()
     {
-        m_humanAgent.SetReward(1f);
+        m_humanAgent.SetReward(1f + m_humanAgent.timePenalty);
         m_robotAgent.SetReward(-1f);
         Reset();
     }
@@ -71,7 +71,7 @@ public class BallScorer : MonoBehaviour
     void RobotWin()
     {
         m_humanAgent.SetReward(-1f);
-        m_robotAgent.SetReward(1f);
+        m_robotAgent.SetReward(1f + m_robotAgent.timePenalty);
         Reset();
     }
 

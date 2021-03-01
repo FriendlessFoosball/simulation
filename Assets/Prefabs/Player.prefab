@@ -57,7 +57,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: f0f0003269eab401d97c0233874c4dff, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: cb1fbc41e137345c58ae7b71090ac38d, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PaddleBehavior
@@ -80,7 +80,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 50000
+  MaxStep: 3000
   ball: {fileID: 0}
   goal: {fileID: 0}
   opponentGoal: {fileID: 0}

@@ -1,0 +1,23 @@
+{
+    "PaddleBehavior": {
+        "checkpoints": [
+            {
+                "steps": 41741,
+                "file_path": "results/recurrent_np_timepenalty/PaddleBehavior/PaddleBehavior-41741.onnx",
+                "reward": null,
+                "creation_time": 1614572942.292638
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 41741,
+            "file_path": "results/recurrent_np_timepenalty/PaddleBehavior.onnx",
+            "reward": null,
+            "creation_time": 1614572942.292638
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1"
+    }
+}
