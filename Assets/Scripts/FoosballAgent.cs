@@ -129,7 +129,7 @@ public class FoosballAgent : Agent {
 
         float spin = Mathf.Abs(offenseRb.angularVelocity.z / maxAngularVelocity) + Mathf.Abs(goalieRb.angularVelocity.z / maxAngularVelocity);
 
-        AddReward(-0.01f * 0.50f * spin);
+        //AddReward(-0.01f * 0.50f * spin);
         //AddReward(-0.001f);
     }
 

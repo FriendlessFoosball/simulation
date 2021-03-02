@@ -23,7 +23,7 @@ public class BallScorer : MonoBehaviour
 
     const float fieldWidth = 12.835f;
     const float fieldLength = 18.47f;
-    const float ballStartMultiplier = 1000f; //20f;
+    const float ballStartMultiplier = 10000f; //20f;
 
     // Start is called before the first frame update
     void Start()
@@ -89,12 +89,12 @@ public class BallScorer : MonoBehaviour
             HumanWin();
     }
 
-    void OnCollisionExit(Collision collision) {
-        if (collision.gameObject.CompareTag("AxisRobot"))
-            m_robotAgent.AddReward(0.02f);
-        else if (collision.gameObject.CompareTag("AxisHuman"))
-            m_humanAgent.AddReward(0.02f);
-    }
+    // void OnCollisionExit(Collision collision) {
+    //     if (collision.gameObject.CompareTag("AxisRobot"))
+    //         m_robotAgent.AddReward(0.02f);
+    //     else if (collision.gameObject.CompareTag("AxisHuman"))
+    //         m_humanAgent.AddReward(0.02f);
+    // }
 
     void FixedUpdate()
     {
