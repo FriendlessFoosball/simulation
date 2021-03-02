@@ -100,8 +100,6 @@ public class FoosballAgent : Agent {
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
-        timePenalty -= existentialPenalty;
-
         //Actions, size = 4
         Vector3 offenseLinMove = Vector3.forward * actions.ContinuousActions[0] * linMoveMultiplier;
 
