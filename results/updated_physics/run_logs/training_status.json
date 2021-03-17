@@ -1,0 +1,47 @@
+{
+    "PaddleBehavior": {
+        "checkpoints": [
+            {
+                "steps": 98499960,
+                "file_path": "results/updated_physics/PaddleBehavior/PaddleBehavior-98499960.onnx",
+                "reward": 0.0,
+                "creation_time": 1614871769.0895076
+            },
+            {
+                "steps": 98999304,
+                "file_path": "results/updated_physics/PaddleBehavior/PaddleBehavior-98999304.onnx",
+                "reward": -0.02857142857142857,
+                "creation_time": 1614872552.0994177
+            },
+            {
+                "steps": 99499913,
+                "file_path": "results/updated_physics/PaddleBehavior/PaddleBehavior-99499913.onnx",
+                "reward": 0.13636363636363635,
+                "creation_time": 1614873343.736441
+            },
+            {
+                "steps": 99999849,
+                "file_path": "results/updated_physics/PaddleBehavior/PaddleBehavior-99999849.onnx",
+                "reward": -1.0,
+                "creation_time": 1614874140.0495775
+            },
+            {
+                "steps": 100003702,
+                "file_path": "results/updated_physics/PaddleBehavior/PaddleBehavior-100003702.onnx",
+                "reward": -0.25,
+                "creation_time": 1614874140.668523
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 100003702,
+            "file_path": "results/updated_physics/PaddleBehavior.onnx",
+            "reward": -0.25,
+            "creation_time": 1614874140.668523
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
